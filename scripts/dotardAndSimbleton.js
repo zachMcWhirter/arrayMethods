@@ -7,6 +7,7 @@ import businesses from "./data.js"
 
 // Since each object is identical in its structure (but not its state), you can write some automation logic with forEach().
 
+
 const renderToDom = document.querySelector("#output")
 renderToDom.innerHTML = "<h1>Active Businesses</h1>"
 
@@ -26,7 +27,7 @@ businesses.forEach(business => {
         ${business.addressStateCode}
     </section>
     <section>
-        ${business.addressZipCode}
+        ${business["addressZipCode"]}
     </section>
     <section>
         ${business.phoneWork}
@@ -39,6 +40,37 @@ businesses.forEach(business => {
         ${business.orders}    
     </section>     
   `
-  renderToDom.innerHTML += "<hr/>"
-
+  renderToDom.innerHTML += "<hr/>"  
 });
+// hr = horizontal rule lines between each section
+
+// *********************************
+
+//   ** Filter Method **
+
+const newYorkBusinesses = businesses.filter(business => {
+    let inNewYork = false
+  
+    if (business.addressStateCode === "NY") {
+        inNewYork = true
+    }
+    return inNewYork
+  })
+  console.log("These are our New York businesses", newYorkBusinesses)
+
+
+const mfgBusinesses = businesses.filter(business => {
+    let mfg = false
+
+    if (business.companyIndustry === "Manufacturing") {
+        mfg = true
+    }
+    return mfg
+  })
+  console.log("These are our manufacturing businesses", mfgBusinesses)
+
+// ********************************
+
+//     ** Map Method **
+
+
