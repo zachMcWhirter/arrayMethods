@@ -15,7 +15,7 @@ businesses.forEach(business => {
   renderToDom.innerHTML += `
     <h2>${business.companyName}</h2>
     <section>
-        ${business.companyIndustry}
+        ${"Industry:"} ${business.companyIndustry}
     </section>
     <section>
         ${business.addressFullStreet}
@@ -68,9 +68,48 @@ const mfgBusinesses = businesses.filter(business => {
     return mfg
   })
   console.log("These are our manufacturing businesses", mfgBusinesses)
+  
+  const mfgHTML =
 
 // ********************************
 
 //     ** Map Method **
 
+renderToDom.innerHTML += "<h1>Purchasing Agents</h1>";
 
+const agents = businesses.map(business => {
+    return business.purchasingAgent
+})
+
+console.table(agents)
+
+agents.forEach(agent => {
+    renderToDom.innerHTML += `
+        <section>${agent.nameFirst} ${agent.nameLast},</section>`;
+    renderToDom.innerHTML += `<hr/>`;
+});
+
+//     const bizCardArray = [
+//         const bizCard = (name, company, phone) => {
+//             fullName: name,
+//             companyName: company,
+//             phoneNumber: phone
+//     }]
+// // const makeAgentBusinessCard = (fullName, company, phoneNumber) => {
+//     const agentBusinessCard = businesses.map(business => { 
+//         return ([business.purchasingAgent],[business.companyName]);
+//        (business.phoneWork)
+
+//     })
+
+// console.table(agentBusinessCard)
+
+// const businessCardInfo = makeAgentBusinessCard.array.forEach(business => {
+//     renderToDom.innerHTML += `
+//         <h2>Purchasing Agents</h2>
+//         <section>${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}</section>
+//         <section>${business.companyName}</section>
+//         <section>${business.phoneWork}</section>
+//     `;
+//     renderToDom.innerHTML += `<hr/>`;
+// });
