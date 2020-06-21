@@ -14,29 +14,25 @@ renderToDom.innerHTML = "<h1>Active Businesses</h1>"
 businesses.forEach(business => {
   renderToDom.innerHTML += `
     <h2>${business.companyName}</h2>
-    <section>
-        ${"Industry:"} ${business.companyIndustry}
+    <section><font color="white"; font-weight:bold;>Industry:</font><br>
+        ${business.companyIndustry}
     </section>
-    <section>
+    <section><font color="white"; font-weight:bold;>Address:</font><br>
         ${business.addressFullStreet}
     </section>
     <section>
-        ${business.addressCity}
-    </section>
-    <section>
-        ${business.addressStateCode}
-    </section>
-    <section>
+        ${business.addressCity}, 
+        ${business.addressStateCode}, 
         ${business["addressZipCode"]}
     </section>
-    <section>
+    <section><font color="white"; font-weight:bold;>Phone:</font><br>
         ${business.phoneWork}
     </section>
-    <section>
-        ${business.purchasingAgent.nameLast},
+    <section><font color="white"; font-weight:bold;>Agent:</font><br>
         ${business.purchasingAgent.nameFirst}
+        ${business.purchasingAgent.nameLast}
     </section>
-    <section>
+    <section><font color="white"; font-weight:bold;>Orders:</font><br>
         ${business.orders}    
     </section>     
   `
@@ -54,9 +50,29 @@ const newYorkBusinesses = businesses.filter(business => {
     if (business.addressStateCode === "NY") {
         inNewYork = true
     }
+    // console.log("test: IN NY!", inNewYork)
     return inNewYork
   })
   console.log("These are our New York businesses", newYorkBusinesses)
+
+// Access to id="nyBiz" HTML element in DOM
+  const nyElement = document.getElementById("nyBiz");
+  nyElement.innerHTML = '<h1>New York Businesses</h1>'
+
+// Iterate through newYorkBusinesses array and display in DOM
+  newYorkBusinesses.forEach(business => {
+
+    nyElement.innerHTML += `
+    <h2>${business.companyName}</h2>
+    <section>
+      ${business.addressFullStreet}
+    </section>
+    <section>
+      ${business.addressCity}, ${business['addressStateCode']} ${business['addressZipCode']}
+    </section>
+    <hr>
+    `
+  })
 
 
 const mfgBusinesses = businesses.filter(business => {
@@ -66,10 +82,28 @@ const mfgBusinesses = businesses.filter(business => {
         mfg = true
     }
     return mfg
-  })
-  console.log("These are our manufacturing businesses", mfgBusinesses)
+    })
+    console.log("These are our manufacturing businesses", mfgBusinesses)
   
-  const mfgHTML =
+  // Access to id="mfgBiz" HTML element in DOM
+    const mfgElement = document.getElementById("mfgBiz");
+    mfgElement.innerHTML = '<h1>Manufacturing Businesses</h1>'
+
+  // Iterate through mfgBusinesses array and display in DOM
+    mfgBusinesses.forEach(business => {
+
+    mfgElement.innerHTML += `
+    <h2>${business.companyName}</h2>
+    <section>
+        ${business.addressFullStreet}
+    </section>
+    <section>
+        ${business.addressCity}, ${business["addressStateCode"]} ${business["addressZipCode"]}
+    </section>
+    <hr>
+    `
+})
+
 
 // ********************************
 
@@ -85,7 +119,8 @@ console.table(agents)
 
 agents.forEach(agent => {
     renderToDom.innerHTML += `
-        <section>${agent.nameFirst} ${agent.nameLast},</section>`;
+        <section>${agent.nameFirst} ${agent.nameLast}</section>`;
+
     renderToDom.innerHTML += `<hr/>`;
 });
 
