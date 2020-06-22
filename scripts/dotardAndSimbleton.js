@@ -109,42 +109,35 @@ const mfgBusinesses = businesses.filter(business => {
 
 //     ** Map Method **
 
-renderToDom.innerHTML += "<h1>Purchasing Agents</h1>";
 
-const agents = businesses.map(business => {
-    return business.purchasingAgent
+
+// Access to purchasing agent HTML element in DOM
+const agentElement = document.getElementById('purchasingAgents')
+agentElement.innerHTML = '<h1>Purchasing Agents</h1>'
+
+// Extracting purchasing agent first and last name, company name and phone number and placing in object
+const agents = businesses.map(businessObject => {
+ 
+  const agentObject = {}
+//  By creating a new object (agentObject) and declaring it as an empty object, you can then customize exactly what you want to return inside of that object
+  agentObject.fullName = `${businessObject.purchasingAgent.nameFirst} ${businessObject.purchasingAgent.nameLast}`
+  agentObject.company = businessObject.companyName
+  agentObject.phoneNumber = businessObject.phoneWork
+
+  return agentObject
+
 })
 
 console.table(agents)
 
-agents.forEach(agent => {
-    renderToDom.innerHTML += `
-        <section>${agent.nameFirst} ${agent.nameLast}</section>`;
+// Iterate through agents array of objects and display in DOM
+agents.forEach(agentObject => {
 
-    renderToDom.innerHTML += `<hr/>`;
-});
+  agentElement.innerHTML += `
+  <h2>${agentObject.fullName}</h2>
+  <h3>${agentObject.company}</h3>
+  <h3>${agentObject.phoneNumber}</h3>
+  <hr/>
+  `
+})
 
-//     const bizCardArray = [
-//         const bizCard = (name, company, phone) => {
-//             fullName: name,
-//             companyName: company,
-//             phoneNumber: phone
-//     }]
-// // const makeAgentBusinessCard = (fullName, company, phoneNumber) => {
-//     const agentBusinessCard = businesses.map(business => { 
-//         return ([business.purchasingAgent],[business.companyName]);
-//        (business.phoneWork)
-
-//     })
-
-// console.table(agentBusinessCard)
-
-// const businessCardInfo = makeAgentBusinessCard.array.forEach(business => {
-//     renderToDom.innerHTML += `
-//         <h2>Purchasing Agents</h2>
-//         <section>${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}</section>
-//         <section>${business.companyName}</section>
-//         <section>${business.phoneWork}</section>
-//     `;
-//     renderToDom.innerHTML += `<hr/>`;
-// });
